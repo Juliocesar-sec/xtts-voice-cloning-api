@@ -37,7 +37,7 @@ tts-api/
 └── requirements.txt      # Dependências do Python
 ```
 
-2. 📄 Conteúdo de cada arquivo app/*.py
+📄 Conteúdo de cada arquivo app/*.py
 
 ```text
 app/__init__.py
@@ -169,7 +169,7 @@ async def text_to_speech(text: str, speaker: str = None):
 ### Define os endpoints da API, permitindo enviar texto e receber áudio.
 ```
 
-3. 🚀 Instalação
+### 🚀 Instalação
 
 1. Certifique-se de usar Python 3.10
 
@@ -225,7 +225,7 @@ uvicorn app.main:app --reload --host 0.0.0.0 --port 8000
  para testar os endpoints.
 
 
-4. 🎤 Clonagem de voz
+### 🎤 Clonagem de voz
 
 . Coloque um arquivo de voz dentro da pasta:
 
@@ -264,7 +264,7 @@ Body:
 Response: Retorna um arquivo de áudio WAV.
 ```
 
-10.📝 Endpoint da API
+### 📝 Endpoint da API
 
 POST /v1/text-to-speech
 
