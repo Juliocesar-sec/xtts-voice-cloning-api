@@ -12,7 +12,7 @@ Um **sistema de Text-to-Speech (TTS)** rápido e completo, inspirado na API da E
 - 📝 **Suporte a textos de até 100k caracteres**  
 - 🎧 **Clonagem de voz ilimitada**  
 - 🔗 **API compatível com ElevenLabs**  
-
+```
 ---
 
 1. Estrutura do Projeto:
@@ -36,7 +36,7 @@ tts-api/
 ├── voices/               # Clonagens de voz salvas
 ├── outputs/              # Áudios gerados pelo TTS
 └── requirements.txt      # Dependências do Python
-
+```
 
 2. 📄 Conteúdo de cada arquivo app/*.py
 app/__init__.py
