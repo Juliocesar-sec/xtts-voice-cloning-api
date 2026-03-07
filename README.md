@@ -18,25 +18,24 @@ Um **sistema de Text-to-Speech (TTS)** rápido e completo, inspirado na API da E
 1. Estrutura do Projeto:
 ## 🗂 Estrutura do Projeto
 
+```text
 tts-api/
 ├── app/
 │   ├── __init__.py
-│   ├── main.py            # Inicializa a API FastAPI
-│   ├── config.py          # Configurações do projeto (caminhos, parâmetros)
-│   ├── tts_engine.py      # Funções de síntese de voz
-│   ├── tts_long_text.py   # Funções para dividir e processar textos longos
-│   ├── streaming.py       # Streaming de áudio em tempo real
-│   ├── queue.py           # Executor paralelo de tarefas de TTS
-│   ├── worker.py          # Worker para processamento de filas
+│   ├── main.py           # Inicializa a API FastAPI
+│   ├── config.py         # Configurações do projeto (caminhos, parâmetros)
+│   ├── tts_engine.py     # Funções de síntese de voz
+│   ├── tts_long_text.py  # Funções para dividir e processar textos longos
+│   ├── streaming.py      # Streaming de áudio em tempo real
+│   ├── queue.py          # Executor paralelo de tarefas de TTS
+│   ├── worker.py         # Worker para processamento de filas
 │   └── routes/
 │       ├── __init__.py
-│       └── tts.py         # Endpoints da API FastAPI (POST /v1/text-to-speech)
-├── models/                # Modelos de TTS baixados
-├── voices/                # Clonagens de voz salvas
-├── outputs/               # Áudios gerados pelo TTS
-└── requirements.txt       # Dependências do Python
-'''
-
+│       └── tts.py        # Endpoints da API FastAPI (POST /v1/text-to-speech)
+├── models/               # Modelos de TTS baixados
+├── voices/               # Clonagens de voz salvas
+├── outputs/              # Áudios gerados pelo TTS
+└── requirements.txt      # Dependências do Python
 📄 Conteúdo de cada arquivo app/*.py
 app/__init__.py
 
