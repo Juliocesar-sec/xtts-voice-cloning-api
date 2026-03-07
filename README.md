@@ -3,9 +3,9 @@
 Um **sistema de Text-to-Speech (TTS)** rápido e completo, inspirado na API da ElevenLabs. Suporta streaming de áudio, textos longos, clonagem de voz ilimitada e uma API compatível com ElevenLabs.
 
 ---
-
-## ⚡ Funcionalidades
 ```text
+## ⚡ Funcionalidades
+
 - 🎤 **Streaming de áudio** em tempo real  
 - 🚀 **3x a 10x mais rápido** que TTS tradicional  
 - 🔄 **Fila paralela** para múltiplas requisições  
