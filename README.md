@@ -5,7 +5,7 @@ Um **sistema de Text-to-Speech (TTS)** rápido e completo, inspirado na API da E
 ---
 
 ## ⚡ Funcionalidades
-
+```text
 - 🎤 **Streaming de áudio** em tempo real  
 - 🚀 **3x a 10x mais rápido** que TTS tradicional  
 - 🔄 **Fila paralela** para múltiplas requisições  
@@ -36,6 +36,8 @@ tts-api/
 ├── voices/               # Clonagens de voz salvas
 ├── outputs/              # Áudios gerados pelo TTS
 └── requirements.txt      # Dependências do Python
+
+
 📄 Conteúdo de cada arquivo app/*.py
 app/__init__.py
 
