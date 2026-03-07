@@ -3,7 +3,6 @@
 Um **sistema de Text-to-Speech (TTS)** rápido e completo, inspirado na API da ElevenLabs. Suporta streaming de áudio, textos longos, clonagem de voz ilimitada e uma API compatível com ElevenLabs.
 
 ---
-```text
 ## ⚡ Funcionalidades
 
 - 🎤 **Streaming de áudio** em tempo real  
@@ -12,7 +11,7 @@ Um **sistema de Text-to-Speech (TTS)** rápido e completo, inspirado na API da E
 - 📝 **Suporte a textos de até 100k caracteres**  
 - 🎧 **Clonagem de voz ilimitada**  
 - 🔗 **API compatível com ElevenLabs**  
-```
+
 ---
 
 1. Estrutura do Projeto:
@@ -39,12 +38,15 @@ tts-api/
 ```
 
 2. 📄 Conteúdo de cada arquivo app/*.py
+
+```text
 app/__init__.py
 
 Arquivo vazio, usado para definir app como um pacote Python.
-
+```
 ##### app/main.py
 
+```text
 from fastapi import FastAPI
 from app.routes import tts
 
@@ -52,9 +54,12 @@ app = FastAPI(title="TTS API", version="1.0")
 app.include_router(tts.router)
 
 ### Responsável por inicializar a API e incluir as rotas do TTS.
+```
 
 #### app/config.py
 
+
+```text
 import os
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -65,8 +70,12 @@ os.makedirs(OUTPUTS_DIR, exist_ok=True)
 os.makedirs(VOICES_DIR, exist_ok=True)
 
 ### Define diretórios de saída e vozes e garante que existam.
+```
 
 #### app/tts_engine.py
+
+
+```text
 
 from TTS.api import TTS
 
@@ -78,8 +87,12 @@ def generate_audio(text: str, speaker: str = None):
     return output_path, 22050  # exemplo de sample rate
 
 #### Funções para gerar áudio a partir do texto usando o modelo XTTS.
+```
 
 ### app/tts_long_text.py
+
+
+```text
 import re
 
 def split_text(text):
@@ -87,9 +100,12 @@ def split_text(text):
     return sentences
 
 #### Divide textos longos em sentenças menores para processamento em lote.
+```
 
 ### app/streaming.py
 
+
+```text
 from fastapi.responses import StreamingResponse
 import io
 
@@ -100,17 +116,22 @@ def stream_audio(file_path):
     return StreamingResponse(iterfile(), media_type="audio/wav")
 
 #### Permite streaming do áudio gerado via FastAPI.
+```
 
 ### app/queue.py
 
+
+```text
 from concurrent.futures import ThreadPoolExecutor
 
 executor = ThreadPoolExecutor(max_workers=4)
 
 #### Executor para processar múltiplos pedidos de TTS em paralelo.
+```
 
 #### app/worker.py
 
+```text
 from .queue import executor
 from .tts_engine import generate_audio
 
@@ -119,9 +140,12 @@ def process_text(text, speaker=None):
     return future
 
 #### Worker que envia tarefas de geração de áudio para a fila paralela.
+```
 
 ### app/routes/tts.py
 
+
+```text
 from fastapi import APIRouter, HTTPException
 from ..tts_long_text import split_text
 from ..worker import process_text
@@ -143,53 +167,67 @@ async def text_to_speech(text: str, speaker: str = None):
 
 
 ### Define os endpoints da API, permitindo enviar texto e receber áudio.
+```
 
 ##  Instalação
+
+```text
 Certifique-se de estar usando Python 3.10:
 
 pyenv install 3.10.13  # se ainda não tiver
 pyenv virtualenv 3.10.13 tts-xtts310
 pyenv activate tts-xtts310
+```
 
 3. Clone o repositório:
 
+```text
 ```bash
 ### 1️ Clonar o repositório
 
 ```bash
 git clone https://github.com/uliocesar-sec/xtts-voice-cloning-api.git
 cd xtts-voice-cloning-api
-
+```
 
 4. Criar ambiente virtual
 
+```text
 Linux/macOS:
 python -m venv venv
 source venv/bin/activate
 
 Windows:
 venv\Scripts\activate
+```
 
 5.Vá para a pasta do projeto:
 
+```text
 cd ~/tts-api
-
+```
 
 6. Instalar dependências
 
+```text
 pip install -r requirements.txt
+```
+7. Executar a API
 
-6. Executar a API
+```text
 uvicorn app.main:app --reload --host 0.0.0.0 --port 8000
+```
 
-7. Acesse a documentação:
+8. Acesse a documentação:
 
+```text
 . Acesse: http://localhost:8000
 
 . Acesse: http://localhost:8000/docs
  para testar os endpoints.
+```
 
-8. Clonagem de voz
+9. Clonagem de voz
 
 . Coloque um arquivo de voz dentro da pasta:
 
@@ -207,7 +245,9 @@ Voz limpa, pouco ruído
 
 Formato WAV ou MP3
 
-9. Endpoint da API
+10. Endpoint da API
+
+```text
 POST /v1/text-to-speech
 
 Request:
@@ -224,12 +264,15 @@ Body:
 }
 
 Response: Retorna um arquivo de áudio WAV.
+```
 
 10. Testar via cURL
 
+```text
 curl -X POST http://localhost:8000/v1/text-to-speech \
 -H "Content-Type: application/json" \
 -d '{"text":"Olá mundo","voice":"voices/minha_voz.wav","language":"pt"}'
+```
 
 ### ⚡ Performance
 
