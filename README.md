@@ -35,7 +35,7 @@ tts-api/
 ├── voices/                # Clonagens de voz salvas
 ├── outputs/               # Áudios gerados pelo TTS
 └── requirements.txt       # Dependências do Python
-
+'''
 
 📄 Conteúdo de cada arquivo app/*.py
 app/__init__.py
