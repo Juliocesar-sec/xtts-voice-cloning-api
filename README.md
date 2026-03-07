@@ -45,12 +45,13 @@ Arquivo vazio, usado para definir app como um pacote Python.
 ```
 ##### app/main.py
 
-```text
+```text                              
 from fastapi import FastAPI
 from app.routes import tts
 
-app = FastAPI(title="TTS API", version="1.0")
-app.include_router(tts.router)
+app = FastAPI(title="TTS API")
+
+app.include_router(tts.router, prefix="/v1")
 
 ### Responsável por inicializar a API e incluir as rotas do TTS.
 ```
@@ -89,23 +90,24 @@ tts_model = TTS("tts_models/multilingual/multi-dataset/xtts_v2")
 # garante que pasta de saída existe
 os.makedirs("outputs", exist_ok=True)
 
-
 def generate_audio(text: str, speaker: str = None, language: str = "pt"):
-    """
-    Gera áudio a partir de texto usando XTTS.
-    """
 
-    speaker = speaker or "default"
-    output_path = f"outputs/{speaker}.wav"
+    output_path = "outputs/output.wav"
+
+    if speaker:
+        speaker_wav = f"voices/{speaker}.wav"
+    else:
+        speaker_wav = None
 
     tts_model.tts_to_file(
         text=text,
         file_path=output_path,
-        speaker_wav=f"voices/{speaker}.wav" if speaker != "default" else None,
-        language=language
+        language=language,
+        speaker_wav=speaker_wav
     )
 
     return output_path, 22050
+
 
 ```
 
@@ -127,18 +129,21 @@ def split_text(text):
 
 ```text
 from fastapi.responses import StreamingResponse
-import io
 
-def stream_audio(file_path):
-    def iterfile():
+
+def stream_audio(file_path: str):
+    """
+    Faz streaming de um arquivo de áudio WAV.
+    """
+
+    def audio_generator():
         with open(file_path, "rb") as f:
-            yield from f
-    return StreamingResponse(iterfile(), media_type="audio/wav")
+            yield f.read()
 
-#### Permite streaming do áudio gerado via FastAPI.
+    return StreamingResponse(audio_generator(), media_type="audio/wav")
 ```
 
-### app/queue.py
+### app/task_queue.py
 
 
 ```text
@@ -152,7 +157,7 @@ executor = ThreadPoolExecutor(max_workers=4)
 #### app/worker.py
 
 ```text
-from .queue import executor
+from .task_queue import executor
 from .tts_engine import generate_audio
 
 def process_text(text, speaker=None):
@@ -173,7 +178,7 @@ from ..streaming import stream_audio
 
 router = APIRouter()
 
-@router.post("/v1/text-to-speech")
+@router.post("/text-to-speech")
 async def text_to_speech(text: str, speaker: str = None):
     sentences = split_text(text)
     audio_files = []
