@@ -172,6 +172,7 @@ async def text_to_speech(text: str, speaker: str = None):
 3. 🚀 Instalação
 
 1. Certifique-se de usar Python 3.10
+
 ```text
 pyenv install 3.10.13  # se ainda não tiver
 pyenv virtualenv 3.10.13 tts-xtts310
