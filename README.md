@@ -17,7 +17,7 @@ Um **sistema de Text-to-Speech (TTS)** rápido e completo, inspirado na API da E
 
 ## 📁 Estrutura do Projeto
 ## 🗂 Estrutura do Projeto
-
+'''
 tts-api/
 ├── app/
 │   ├── __init__.py
