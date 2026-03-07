@@ -169,65 +169,62 @@ async def text_to_speech(text: str, speaker: str = None):
 ### Define os endpoints da API, permitindo enviar texto e receber áudio.
 ```
 
-##  Instalação
+3. 🚀 Instalação
 
+1. Certifique-se de usar Python 3.10
 ```text
-Certifique-se de estar usando Python 3.10:
-
 pyenv install 3.10.13  # se ainda não tiver
 pyenv virtualenv 3.10.13 tts-xtts310
 pyenv activate tts-xtts310
 ```
 
-3. Clone o repositório:
+2. Clone o repositório:
 
 ```text
-```bash
-### 1️ Clonar o repositório
-
 ```bash
 git clone https://github.com/uliocesar-sec/xtts-voice-cloning-api.git
 cd xtts-voice-cloning-api
 ```
 
-4. Criar ambiente virtual
+3. Criar ambiente virtual
 
-```text
 Linux/macOS:
+```text
 python -m venv venv
 source venv/bin/activate
-
+```
 Windows:
+```text
 venv\Scripts\activate
 ```
 
-5.Vá para a pasta do projeto:
+4.Vá para a pasta do projeto:
 
 ```text
 cd ~/tts-api
 ```
 
-6. Instalar dependências
+5. Instalar dependências
 
 ```text
 pip install -r requirements.txt
 ```
-7. Executar a API
+
+6. Executar a API
 
 ```text
 uvicorn app.main:app --reload --host 0.0.0.0 --port 8000
 ```
 
-8. Acesse a documentação:
+7. Acesse a documentação:
 
-```text
 . Acesse: http://localhost:8000
 
 . Acesse: http://localhost:8000/docs
  para testar os endpoints.
-```
 
-9. Clonagem de voz
+
+4. 🎤 Clonagem de voz
 
 . Coloque um arquivo de voz dentro da pasta:
 
@@ -266,7 +263,26 @@ Body:
 Response: Retorna um arquivo de áudio WAV.
 ```
 
-10. Testar via cURL
+10.📝 Endpoint da API
+
+POST /v1/text-to-speech
+
+Request Body:
+```text
+{
+  "text": "Olá, este é um teste de geração de voz.",
+  "voice": "voices/minha_voz.wav",
+  "language": "pt"
+}
+```
+
+Response:
+```text
+{
+  "audio_files": ["outputs/default.wav"]
+}
+```
+Testar via cURL
 
 ```text
 curl -X POST http://localhost:8000/v1/text-to-speech \
