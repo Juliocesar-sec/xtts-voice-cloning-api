@@ -38,7 +38,7 @@ tts-api/
 └── requirements.txt      # Dependências do Python
 
 
-📄 Conteúdo de cada arquivo app/*.py
+2. 📄 Conteúdo de cada arquivo app/*.py
 app/__init__.py
 
 Arquivo vazio, usado para definir app como um pacote Python.
@@ -145,9 +145,13 @@ async def text_to_speech(text: str, speaker: str = None):
 ### Define os endpoints da API, permitindo enviar texto e receber áudio.
 
 ##  Instalação
-**Pré-requisitos:** Python 3.11, Git  
+Certifique-se de estar usando Python 3.10:
 
-1. Clone o repositório:
+pyenv install 3.10.13  # se ainda não tiver
+pyenv virtualenv 3.10.13 tts-xtts310
+pyenv activate tts-xtts310
+
+3. Clone o repositório:
 
 ```bash
 ### 1️ Clonar o repositório
@@ -157,34 +161,37 @@ git clone https://github.com/uliocesar-sec/xtts-voice-cloning-api.git
 cd xtts-voice-cloning-api
 
 
-###2️ Criar ambiente virtual
+4. Criar ambiente virtual
 
 Linux/macOS:
 python -m venv venv
 source venv/bin/activate
-pyenv virtualenv 3.11.9 tts-env
-pyenv activate tts-env
 
 Windows:
 venv\Scripts\activate
 
+5.Vá para a pasta do projeto:
 
-###3️ Instalar dependências
+cd ~/tts-api
+
+
+6. Instalar dependências
 
 pip install -r requirements.txt
 
-###  Executar a API
+6. Executar a API
 uvicorn app.main:app --reload --host 0.0.0.0 --port 8000
 
-### Acesse a documentação:
+7. Acesse a documentação:
 
-Acesse: http://localhost:8000
+. Acesse: http://localhost:8000
 
-Documentação automática: http://localhost:8000/docs
+. Acesse: http://localhost:8000/docs
+ para testar os endpoints.
 
-🎙 Clonagem de voz
+8. Clonagem de voz
 
-Coloque um arquivo de voz dentro da pasta:
+. Coloque um arquivo de voz dentro da pasta:
 
 voices/
 
@@ -200,7 +207,7 @@ Voz limpa, pouco ruído
 
 Formato WAV ou MP3
 
-📡 Endpoint da API
+9. Endpoint da API
 POST /v1/text-to-speech
 
 Request:
@@ -218,7 +225,7 @@ Body:
 
 Response: Retorna um arquivo de áudio WAV.
 
-### 🧪 Testar via cURL
+10. Testar via cURL
 
 curl -X POST http://localhost:8000/v1/text-to-speech \
 -H "Content-Type: application/json" \
@@ -238,19 +245,19 @@ Exemplo em GPU:
 
 RTX 3060 → ~10x tempo real
 
-### 🔧 Tecnologias
+### 🔧 Tecnologias ###
 
 Python
 
 FastAPI
 
-Uvicorn
+✅ Uvicorn
 
-Coqui TTS
+✅ Coqui TTS
 
-XTTS v2
+✅ XTTS v2
 
-PyTorch
+✅ PyTorch
 
 ### ⚡ Funcionalidades
 
