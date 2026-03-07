@@ -75,17 +75,38 @@ os.makedirs(VOICES_DIR, exist_ok=True)
 
 
 ```text
-
+import os
+import torch
 from TTS.api import TTS
+from TTS.tts.configs.xtts_config import XttsConfig
 
+# Corrige erro do PyTorch 2.6+
+torch.serialization.add_safe_globals([XttsConfig])
+
+# Carrega modelo XTTS
 tts_model = TTS("tts_models/multilingual/multi-dataset/xtts_v2")
 
-def generate_audio(text: str, speaker: str = None):
-    output_path = f"outputs/{speaker or 'default'}.wav"
-    tts_model.tts_to_file(text=text, speaker=speaker, file_path=output_path)
-    return output_path, 22050  # exemplo de sample rate
+# garante que pasta de saída existe
+os.makedirs("outputs", exist_ok=True)
 
-#### Funções para gerar áudio a partir do texto usando o modelo XTTS.
+
+def generate_audio(text: str, speaker: str = None, language: str = "pt"):
+    """
+    Gera áudio a partir de texto usando XTTS.
+    """
+
+    speaker = speaker or "default"
+    output_path = f"outputs/{speaker}.wav"
+
+    tts_model.tts_to_file(
+        text=text,
+        file_path=output_path,
+        speaker_wav=f"voices/{speaker}.wav" if speaker != "default" else None,
+        language=language
+    )
+
+    return output_path, 22050
+
 ```
 
 ### app/tts_long_text.py
