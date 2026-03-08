@@ -1,25 +1,22 @@
 import os
 import torch
+import uuid
 from TTS.api import TTS
-from TTS.tts.configs.xtts_config import XttsConfig
+from app.config import OUTPUTS_DIR, VOICES_DIR
 
-# Corrige erro do PyTorch 2.6+
-torch.serialization.add_safe_globals([XttsConfig])
+# Correção para PyTorch 2.6+
+torch.serialization.add_safe_globals(["XttsConfig"])
 
-# Carrega modelo XTTS
-tts_model = TTS("tts_models/multilingual/multi-dataset/xtts_v2")
-
-# garante que pasta de saída existe
-os.makedirs("outputs", exist_ok=True)
+# Configuração focada em CPU para o Debian
+device = "cpu"
+tts_model = TTS("tts_models/multilingual/multi-dataset/xtts_v2").to(device)
 
 def generate_audio(text: str, speaker: str = None, language: str = "pt"):
+    # Gera um nome aleatório para não sobrescrever arquivos
+    unique_name = f"tts_{uuid.uuid4().hex}.wav"
+    output_path = os.path.join(OUTPUTS_DIR, unique_name)
 
-    output_path = "outputs/output.wav"
-
-    if speaker:
-        speaker_wav = f"voices/{speaker}.wav"
-    else:
-        speaker_wav = None
+    speaker_wav = os.path.join(VOICES_DIR, speaker) if speaker else None
 
     tts_model.tts_to_file(
         text=text,
@@ -27,5 +24,4 @@ def generate_audio(text: str, speaker: str = None, language: str = "pt"):
         language=language,
         speaker_wav=speaker_wav
     )
-
-    return output_path, 22050
+    return output_path
