@@ -1,0 +1,18 @@
+from fastapi import APIRouter, HTTPException
+from ..tts_long_text import split_text
+from ..worker import process_text
+from ..streaming import stream_audio
+
+router = APIRouter()
+
+@router.post("/text-to-speech")
+async def text_to_speech(text: str, speaker: str = None):
+    sentences = split_text(text)
+    audio_files = []
+
+    for sentence in sentences:
+        future = process_text(sentence, speaker)
+        audio_file, sr = future.result()  # retorna caminho do arquivo e sample rate
+        audio_files.append(audio_file)
+
+    return {"audio_files": audio_files}
