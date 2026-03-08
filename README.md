@@ -58,7 +58,7 @@ pyenv activate tts-xtts310
 
 ```text
 ```bash
-git clone https://github.com/uliocesar-sec/xtts-voice-cloning-api.git
+git clone https://github.com/juliocesar-sec/xtts-voice-cloning-api.git
 cd xtts-voice-cloning-api
 ```
 
