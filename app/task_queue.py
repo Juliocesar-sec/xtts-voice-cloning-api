@@ -1,3 +1,4 @@
 from concurrent.futures import ThreadPoolExecutor
 
-executor = ThreadPoolExecutor(max_workers=4)
+# Apenas 1 por vez para manter a estabilidade do sistema no CPU
+executor = ThreadPoolExecutor(max_workers=1)
