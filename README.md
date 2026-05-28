@@ -1,6 +1,6 @@
 # fast-tts-api
 
-Um **sistema de Text-to-Speech (TTS)** rápido e completo, inspirado na API da ElevenLabs. Suporta streaming de áudio, textos longos, clonagem de voz ilimitada e uma API compatível com ElevenLabs.
+Um **sistema de Text-to-Speech (TTS)** rápido e completo. Suporta streaming de áudio, textos longos, clonagem de voz ilimitada e uma API compatível com ElevenLabs.
 
 ---
 ## ⚡ Funcionalidades
