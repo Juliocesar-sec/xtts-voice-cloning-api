@@ -206,9 +206,6 @@ FastAPI
 
 ✅ Até 100k caracteres por requisição
 
-📜 Licença
-
-MIT License
 
 
 
